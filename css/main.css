@@ -1,0 +1,452 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Modern Color Palette */
+    --primary-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-bg: #f8fafc;
+    --accent-color: #4f46e5;
+    --accent-hover: #4338ca;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease-out;
+    --transition-normal: 0.3s ease-out;
+    --transition-slow: 0.5s ease-out;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    background: var(--primary-bg);
+    overflow: hidden;
+    user-select: none;
+    color: var(--text-primary);
+}
+
+/* Boot Screen */
+.boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    color: white;
+}
+
+.boot-content {
+    text-align: center;
+    max-width: 500px;
+    padding: var(--spacing-xl);
+}
+
+.boot-logo {
+    margin-bottom: var(--spacing-2xl);
+    animation: fadeInUp 1s ease-out;
+}
+
+.boot-logo i {
+    font-size: 5rem;
+    color: #60a5fa;
+    margin-bottom: var(--spacing-lg);
+    display: block;
+    animation: pulse 2s infinite;
+}
+
+.boot-logo h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    background: linear-gradient(45deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.version {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+.boot-loading {
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.loading-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-lg);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    width: 0%;
+    border-radius: var(--radius-lg);
+    animation: bootProgress 3s ease-in-out forwards;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+}
+
+.boot-messages {
+    min-height: 60px;
+}
+
+.boot-message {
+    opacity: 0;
+    font-size: 1rem;
+    margin-bottom: var(--spacing-sm);
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.boot-message:nth-child(1) { animation-delay: 0.5s; }
+.boot-message:nth-child(2) { animation-delay: 1.5s; }
+.boot-message:nth-child(3) { animation-delay: 2.5s; }
+.boot-message:nth-child(4) { animation-delay: 3.5s; }
+
+/* OS Container */
+.os-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    overflow: hidden;
+}
+
+/* Desktop */
+.desktop {
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: var(--primary-bg);
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100vh - 60px);
+}
+
+.desktop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    pointer-events: none;
+}
+
+.desktop-icons {
+    padding: var(--spacing-xl);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 100px);
+    gap: var(--spacing-xl);
+    min-height: calc(100vh - 120px);
+    align-content: start;
+    position: relative;
+    z-index: 1;
+}
+
+.desktop-icon {
+    width: 80px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-normal);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.desktop-icon:hover {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    transform: translateY(-2px);
+    box-shadow: var(--glass-shadow);
+}
+
+.desktop-icon.selected {
+    background: rgba(79, 70, 229, 0.3);
+    border: 1px solid rgba(79, 70, 229, 0.5);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+}
+
+.desktop-icon i {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: var(--spacing-sm);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-normal);
+}
+
+.desktop-icon:hover i {
+    transform: scale(1.1);
+}
+
+.desktop-icon span {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+}
+
+/* Desktop Widgets */
+.desktop-widgets {
+    position: absolute;
+    top: var(--spacing-xl);
+    right: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.widget {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-lg);
+    min-width: 200px;
+    box-shadow: var(--glass-shadow);
+    color: white;
+    transition: all var(--transition-normal);
+}
+
+.widget:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+}
+
+.widget-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.widget-header i {
+    font-size: 1.25rem;
+    color: #60a5fa;
+}
+
+.weather-widget .temperature {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.weather-widget .condition {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
+.system-monitor .monitor-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.875rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #059669);
+    border-radius: var(--radius-sm);
+    transition: width var(--transition-normal);
+}
+
+.windows-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.windows-container .window {
+    pointer-events: auto;
+}
+
+/* Context Menu */
+.context-menu {
+    position: fixed;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    z-index: 3000;
+    min-width: 200px;
+    padding: var(--spacing-sm);
+    animation: contextMenuSlide 0.2s ease-out;
+}
+
+.context-item {
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+    font-size: 0.875rem;
+}
+
+.context-item:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+.context-item i {
+    font-size: 1rem;
+    width: 16px;
+}
+
+.context-separator {
+    height: 1px;
+    background: var(--border-color);
+    margin: var(--spacing-sm) 0;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9998;
+    color: white;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--spacing-lg);
+}
+
+.loading-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .desktop-icons {
+        grid-template-columns: repeat(auto-fill, 80px);
+        gap: var(--spacing-lg);
+        padding: var(--spacing-lg);
+        min-height: calc(100vh - 110px);
+    }
+    
+    .desktop-icon {
+        width: 70px;
+        height: 80px;
+    }
+    
+    .desktop-icon i {
+        font-size: 2rem;
+    }
+    
+    .desktop-icon span {
+        font-size: 0.75rem;
+    }
+    
+    .desktop-widgets {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: var(--spacing-lg);
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .widget {
+        min-width: 150px;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .desktop-icons {
+        grid-template-columns: repeat(auto-fill, 70px);
+        gap: var(--spacing-md);
+        min-height: calc(100vh - 100px);
+    }
+    
+    .desktop-icon {
+        width: 60px;
+        height: 70px;
+        padding: var(--spacing-sm);
+    }
+    
+    .desktop-icon i {
+        font-size: 1.75rem;
+    }
+}

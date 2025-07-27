@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RetroOS - Advanced Operating System</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/windows.css">
+    <link rel="stylesheet" href="css/taskbar.css">
+    <link rel="stylesheet" href="css/applications.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Boot Screen -->
+    <div id="bootScreen" class="boot-screen">
+        <div class="boot-content">
+            <div class="boot-logo">
+                <i class="ri-computer-line"></i>
+                <h1>RetroOS</h1>
+                <div class="version">Advanced Edition v2.0</div>
+            </div>
+            <div class="boot-loading">
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <div class="boot-messages">
+                    <div class="boot-message">Initializing system components...</div>
+                    <div class="boot-message">Loading device drivers...</div>
+                    <div class="boot-message">Starting user interface...</div>
+                    <div class="boot-message">System ready!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main OS Container -->
+    <div id="osContainer" class="os-container" style="display: none;">
+        <!-- Desktop -->
+        <div id="desktop" class="desktop">
+            <!-- Desktop Icons -->
+            <div class="desktop-icons">
+                <div class="desktop-icon" data-app="file-manager">
+                    <i class="ri-folder-line"></i>
+                    <span>File Manager</span>
+                </div>
+                <div class="desktop-icon" data-app="text-editor">
+                    <i class="ri-file-text-line"></i>
+                    <span>Text Editor</span>
+                </div>
+                <div class="desktop-icon" data-app="image-editor">
+                    <i class="ri-image-edit-line"></i>
+                    <span>Image Editor</span>
+                </div>
+                <div class="desktop-icon" data-app="terminal">
+                    <i class="ri-terminal-line"></i>
+                    <span>Terminal</span>
+                </div>
+                <div class="desktop-icon" data-app="calculator">
+                    <i class="ri-calculator-line"></i>
+                    <span>Calculator</span>
+                </div>
+                <div class="desktop-icon" data-app="media-player">
+                    <i class="ri-play-circle-line"></i>
+                    <span>Media Player</span>
+                </div>
+                <div class="desktop-icon" data-app="web-browser">
+                    <i class="ri-global-line"></i>
+                    <span>Web Browser</span>
+                </div>
+                <div class="desktop-icon" data-app="settings">
+                    <i class="ri-settings-line"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="desktop-icon" data-app="games">
+                    <i class="ri-gamepad-line"></i>
+                    <span>Games</span>
+                </div>
+                <div class="desktop-icon" data-app="code-editor">
+                    <i class="ri-code-line"></i>
+                    <span>Code Editor</span>
+                </div>
+            </div>
+
+            <!-- Desktop Widgets -->
+            <div class="desktop-widgets">
+                <div class="widget weather-widget">
+                    <div class="widget-header">
+                        <i class="ri-sun-line"></i>
+                        <span>Weather</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="temperature">22°C</div>
+                        <div class="condition">Sunny</div>
+                    </div>
+                </div>
+                
+                <div class="widget system-monitor">
+                    <div class="widget-header">
+                        <i class="ri-dashboard-line"></i>
+                        <span>System</span>
+                    </div>
+                    <div class="widget-content">
+                        <div class="monitor-item">
+                            <span>CPU:</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 45%"></div>
+                            </div>
+                            <span>45%</span>
+                        </div>
+                        <div class="monitor-item">
+                            <span>RAM:</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 62%"></div>
+                            </div>
+                            <span>62%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Windows Container -->
+        <div id="windowsContainer" class="windows-container">
+            <!-- Windows will be created here -->
+        </div>
+
+        <!-- Context Menu -->
+        <div id="contextMenu" class="context-menu" style="display: none;">
+            <div class="context-item" data-action="refresh">
+                <i class="ri-refresh-line"></i>
+                <span>Refresh</span>
+            </div>
+            <div class="context-separator"></div>
+            <div class="context-item" data-action="new-folder">
+                <i class="ri-folder-add-line"></i>
+                <span>New Folder</span>
+            </div>
+            <div class="context-item" data-action="new-file">
+                <i class="ri-file-add-line"></i>
+                <span>New File</span>
+            </div>
+            <div class="context-separator"></div>
+            <div class="context-item" data-action="wallpaper">
+                <i class="ri-image-line"></i>
+                <span>Change Wallpaper</span>
+            </div>
+            <div class="context-item" data-action="properties">
+                <i class="ri-settings-line"></i>
+                <span>Properties</span>
+            </div>
+        </div>
+
+        <!-- Advanced Taskbar -->
+        <div id="taskbar" class="taskbar">
+            <button id="startButton" class="start-button">
+                <div class="start-icon">
+                    <i class="ri-windows-line"></i>
+                </div>
+                <span>Start</span>
+            </button>
+            
+            <div class="taskbar-search">
+                <i class="ri-search-line"></i>
+                <input type="text" placeholder="Search apps, files, settings...">
+            </div>
+            
+            <div id="taskbarButtons" class="taskbar-buttons"></div>
+            
+            <div class="system-tray">
+                <div class="tray-icons">
+                    <div class="tray-icon" data-tooltip="Network">
+                        <i class="ri-wifi-line"></i>
+                    </div>
+                    <div class="tray-icon" data-tooltip="Volume">
+                        <i class="ri-volume-up-line"></i>
+                    </div>
+                    <div class="tray-icon" data-tooltip="Battery">
+                        <i class="ri-battery-line"></i>
+                        <span class="battery-level">85%</span>
+                    </div>
+                    <div class="tray-icon" data-tooltip="Notifications">
+                        <i class="ri-notification-line"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                </div>
+                <div id="systemClock" class="system-clock">
+                    <div class="time">12:00 PM</div>
+                    <div class="date">Mon, Jan 15</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Start Menu -->
+        <div id="startMenu" class="start-menu" style="display: none;">
+            <div class="start-menu-sidebar">
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="ri-user-line"></i>
+                    </div>
+                    <div class="user-info">
+                        <div class="username">RetroOS User</div>
+                        <div class="user-status">Administrator</div>
+                    </div>
+                </div>
+                
+                <div class="quick-actions">
+                    <div class="quick-action" data-action="settings">
+                        <i class="ri-settings-line"></i>
+                        <span>Settings</span>
+                    </div>
+                    <div class="quick-action" data-action="power">
+                        <i class="ri-shut-down-line"></i>
+                        <span>Power</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="start-menu-main">
+                <div class="start-menu-header">
+                    <h3>Pinned Apps</h3>
+                </div>
+                
+                <div class="pinned-apps">
+                    <div class="app-tile large" data-app="file-manager">
+                        <i class="ri-folder-line"></i>
+                        <span>File Manager</span>
+                    </div>
+                    <div class="app-tile" data-app="text-editor">
+                        <i class="ri-file-text-line"></i>
+                        <span>Text Editor</span>
+                    </div>
+                    <div class="app-tile" data-app="web-browser">
+                        <i class="ri-global-line"></i>
+                        <span>Browser</span>
+                    </div>
+                    <div class="app-tile" data-app="media-player">
+                        <i class="ri-play-circle-line"></i>
+                        <span>Media</span>
+                    </div>
+                    <div class="app-tile" data-app="image-editor">
+                        <i class="ri-image-edit-line"></i>
+                        <span>Image Editor</span>
+                    </div>
+                    <div class="app-tile" data-app="calculator">
+                        <i class="ri-calculator-line"></i>
+                        <span>Calculator</span>
+                    </div>
+                </div>
+                
+                <div class="start-menu-section">
+                    <h3>Recently Used</h3>
+                    <div class="recent-items">
+                        <div class="recent-item">
+                            <i class="ri-file-text-line"></i>
+                            <span>Document.txt</span>
+                        </div>
+                        <div class="recent-item">
+                            <i class="ri-image-line"></i>
+                            <span>Screenshot.png</span>
+                        </div>
+                        <div class="recent-item">
+                            <i class="ri-folder-line"></i>
+                            <span>Downloads</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="start-menu-section">
+                    <h3>All Apps</h3>
+                    <div class="all-apps">
+                        <div class="app-category">
+                            <div class="category-header">
+                                <i class="ri-folder-line"></i>
+                                <span>Productivity</span>
+                            </div>
+                            <div class="category-apps">
+                                <div class="app-item" data-app="text-editor">Text Editor</div>
+                                <div class="app-item" data-app="calculator">Calculator</div>
+                                <div class="app-item" data-app="code-editor">Code Editor</div>
+                            </div>
+                        </div>
+                        
+                        <div class="app-category">
+                            <div class="category-header">
+                                <i class="ri-gamepad-line"></i>
+                                <span>Entertainment</span>
+                            </div>
+                            <div class="category-apps">
+                                <div class="app-item" data-app="games">Games</div>
+                                <div class="app-item" data-app="media-player">Media Player</div>
+                            </div>
+                        </div>
+                        
+                        <div class="app-category">
+                            <div class="category-header">
+                                <i class="ri-tools-line"></i>
+                                <span>System</span>
+                            </div>
+                            <div class="category-apps">
+                                <div class="app-item" data-app="terminal">Terminal</div>
+                                <div class="app-item" data-app="settings">Settings</div>
+                                <div class="app-item" data-app="file-manager">File Manager</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Center -->
+        <div id="notificationCenter" class="notification-center" style="display: none;">
+            <div class="notification-header">
+                <h3>Notifications</h3>
+                <button class="clear-all">Clear All</button>
+            </div>
+            <div class="notifications-list">
+                <div class="notification-item">
+                    <i class="ri-information-line"></i>
+                    <div class="notification-content">
+                        <div class="notification-title">System Update</div>
+                        <div class="notification-message">RetroOS has been updated to version 2.0</div>
+                        <div class="notification-time">2 minutes ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <i class="ri-download-line"></i>
+                    <div class="notification-content">
+                        <div class="notification-title">Download Complete</div>
+                        <div class="notification-message">document.pdf has been downloaded</div>
+                        <div class="notification-time">5 minutes ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <i class="ri-battery-low-line"></i>
+                    <div class="notification-content">
+                        <div class="notification-title">Low Battery</div>
+                        <div class="notification-message">Battery level is below 20%</div>
+                        <div class="notification-time">10 minutes ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Notifications -->
+        <div id="notifications" class="notifications"></div>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/core/system.js"></script>
+    <script src="js/core/window-manager.js"></script>
+    <script src="js/core/taskbar.js"></script>
+    <script src="js/core/desktop.js"></script>
+    <script src="js/applications/file-manager.js"></script>
+    <script src="js/applications/text-editor.js"></script>
+    <script src="js/applications/image-editor.js"></script>
+    <script src="js/applications/terminal.js"></script>
+    <script src="js/applications/calculator.js"></script>
+    <script src="js/applications/media-player.js"></script>
+    <script src="js/applications/web-browser.js"></script>
+    <script src="js/applications/settings.js"></script>
+    <script src="js/applications/games.js"></script>
+    <script src="js/applications/code-editor.js"></script>
+    <script src="js/utils/storage.js"></script>
+    <script src="js/utils/themes.js"></script>
+    <script src="js/utils/notifications.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
